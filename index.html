@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestandsupload</title>
+</head>
+<body>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file">
+        <button type="button" id="uploadButton">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            var form = document.getElementById('uploadForm');
+            var formData = new FormData(form);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data); // Toon de reactie van de server in de console
+            })
+            .catch(error => console.error('Fout bij uploaden:', error));
+        });
+    </script>
+</body>
+</html>
