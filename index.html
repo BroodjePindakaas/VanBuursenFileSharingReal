@@ -11,6 +11,11 @@
         <button type="button" id="uploadButton">Upload</button>
     </form>
 
+    <!-- Voeg een tekstlabel toe voor de link -->
+    <div id="linkLabel">
+        <span id="linkText"></span>
+    </div>
+
     <script>
         document.getElementById('uploadButton').addEventListener('click', function() {
             var form = document.getElementById('uploadForm');
@@ -22,10 +27,32 @@
             })
             .then(response => response.text())
             .then(data => {
-                console.log(data); // Toon de reactie van de server in de console
+                // Toon de reactie van de server in de console
+                console.log(data);
+
+                // Toon de link in het label
+                document.getElementById('linkText').innerText = data;
             })
             .catch(error => console.error('Fout bij uploaden:', error));
         });
     </script>
+
+    <style>
+        /* Stijl voor het tekstlabel */
+        #linkLabel {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #linkText {
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
 </body>
 </html>
